@@ -13,6 +13,7 @@ import AsyncHTTPClient
 import NIOPosix
 import MarkdownUI
 import ActivityIndicatorView
+import SwiftSoup
 
 
 struct Source: Identifiable, Hashable {
@@ -65,22 +66,23 @@ class GemSearchViewModel: ObservableObject {
                 
                 model = GenerativeModel(
                     name: "gemini-1.5-flash",
-                    apiKey: "",
+                    apiKey: "AIzaSyBliBoV4yQK08NfoRUSvWEtmINXC-EwTAQ",
                     safetySettings: safetySettings,
                     systemInstruction: """
                                         Your task is to optimize the user's query for a Google search.
-                                        
-                                        If the question has multiple parts, feel free to generalize the query if the parts fall under a general category and return it as a String in an array.
-                                        Example: If I ask about Elon Musk's age and family, it can be generalized to 'About Elon Musk' or 'Elon Musk Background'. Do not use the keyword "Biography".
-                                        If the question is already direct, just return the original query as a String in an array.
+                                    
+                                        Understand the query's intent, identify key words, and optimize the query's structure.
+                                    
+                                        Try to refine the query so it yields relevant Google results and keep the query to the point and direct.
+                                    
+                                        If the query is already direct, just return the original query as a String in an array.
                                     
                                         ALWAYS return your response ONLY as a String in an array for the Swift Language.
+                                    
+                                        Also, the most recent/current year is \(2024).
+                                        The year is NOT \(2023).
+                                        Today's date: \(Date()).
                                     """
-                    //                                If the parts do not fall under the same category, try to split the query into follow ups in array form.
-                    //                                Example: What is Samsung and who is Lionel Messi, should just return What is Samsung. and Who is Lionel Messi.
-                    //
-                    //                                If a query needs several steps to solve, divide the query into follow-up steps into array form.
-                    //                                Example: Where was the current Ballon Dor Winner Born? should return Who is the current Ballon Winner, and Where was they born?.
                     
                     
                 )
@@ -94,7 +96,7 @@ class GemSearchViewModel: ObservableObject {
                 
                 inputMessage = ""
                 
-                let response = try await model!.generateContent(prompt)
+                let response = try await model!.generateContent("User's Query: " + prompt)
                 
                 print(response)
                 
@@ -112,10 +114,7 @@ class GemSearchViewModel: ObservableObject {
                     array = [prompt]
                 }
                 
-                
-                var semaphore = DispatchSemaphore(value: 0)
-                
-                let parameters = "{\"q\":\"\(array[0])\",\"num\":7}"
+                let parameters = "{\"q\":\"\(array[0])\",\"num\":6}"
                 let postData = parameters.data(using: .utf8)
                 
                 var request = URLRequest(url: URL(string: "https://google.serper.dev/search")!,timeoutInterval: Double.infinity)
@@ -131,13 +130,9 @@ class GemSearchViewModel: ObservableObject {
                 serperResult = try decoder.decode(SerperResult.self, from: data.0)
                 
                 
-                let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-                
-                let httpClient = HTTPClient(eventLoopGroupProvider: .shared(eventLoopGroup))
-                
-                defer {
-                    try? httpClient.syncShutdown()
-                }
+                //                let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+                //
+                //                let httpClient = HTTPClient(eventLoopGroupProvider: .shared(eventLoopGroup))
                 
                 var mainContent = ""
                 
@@ -145,10 +140,14 @@ class GemSearchViewModel: ObservableObject {
                 
                 if let content = serperResult!.answerBox {
                     mainContent += content.snippet ?? ""
+                    
+                    print("\n\nAnswer Box: \(content.snippet)\n\n")
                 }
                 
                 if let content = serperResult!.knowledgeGraph {
                     mainContent += content.description ?? ""
+                    
+                    print("\n\nKnowledge Graph: \(content.description)\n\n")
                     
                     //                    if content.imageUrl != nil {
                     //                        mainImage = content.imageUrl!
@@ -161,46 +160,62 @@ class GemSearchViewModel: ObservableObject {
                     
                     guard link.link != nil else { continue }
                     
-                    var request = HTTPClientRequest(url: link.link!)
+                    let data = try await URLSession.shared.data(from: URL(string: link.link!)!)
+                    let doc = String(data: data.0, encoding: .utf8)
                     
-                    request.headers.add(name: "User-Agent", value: "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/115.0.5790.130 Mobile/15E148 Safari/604.1")
+                    guard doc != nil else {continue}
                     
-                    request.method = .GET
+                    let document = try SwiftSoup.parse(doc!)
                     
-                    let response = try await httpClient.execute(request, timeout: .seconds(120))
+                    var text: String?
                     
+                    // Example: Extract all text inside <p> tags
+                    let paragraphs = try document.select("p").array()
                     
-                    let plain = String(buffer: try await response.body.collect(upTo: 1024 * 1024 * 32))
+                    for paragraph in paragraphs {
+                        text = try? paragraph.text()
+                        
+                        guard text != nil else {continue}
+                        
+                        mainContent += text!
+                        mainContent += "\n"
+                        //                        print("Paragraph: \(text)")
+                    }
                     
-                    let loader = HtmlLoader(html: plain, url: link.link!)
-                    let doc = await loader.load()
+                    //                    // You can also target other elements like headers, articles, etc.
+                    //                    let headers = try document.select("h1, h2, h3").array()
+                    //                    for header in headers {
+                    //                        let headerText = try header.text()
+                    //                        print("Header: \(headerText)")
+                    //                    }
+                    //
                     
-                    guard !doc.isEmpty else { continue }
                     
                     //                    withAnimation(.smooth(duration: 0.4)) {
                     currentWebpage = link.title ?? "Missing Title"
                     //                    }
                     
-                    let image = extractFaviconURL(from: plain, baseURL: URL(string: link.link!)!)
+                    let image = extractFaviconURL(from: doc!, baseURL: URL(string: link.link!)!)
                     
                     sourceArray.append(Source(link: link.link!, title: link.title ?? "Missing Title", icon: image))
                     
-                    mainContent += doc.first!.page_content.prefix(1000) // 200 words
-                    mainContent += "\n"
                     
                 }
                 
                 
+                print("\n\nMAIN: " + mainContent + "\n\n")
+                
                 let newModel = GenerativeModel(
-                    name: "gemini-1.5-flash",
-                    apiKey: "",
+                    name: "gemini-1.5-pro",
+                    apiKey: "AIzaSyBliBoV4yQK08NfoRUSvWEtmINXC-EwTAQ",
                     safetySettings: safetySettings,
-                    systemInstruction: "You are GemSearch, an AI powered by google searching. Do not reveal that you found the data from webpages. Just answer the query directly in at least 100 words but no more tha 250."
+                    systemInstruction: "You are GemSearch, a kind and professional AI powered by Google searching. Do not reveal that the text/information was provided. AlWAYS, believe that you found the information, but do not speak in first person. Answer the query the best you can with what you know and use the provided summed webpage content as reference information. Feel free to give additional details in at least 50 words but no more than 250."
                 )
                 
                 viewState = .success
                 
-                let contentStream = newModel.generateContentStream("Here's the summed content of various webpages. Webpages Content: \(mainContent). This is the user's original query (\(inputMessage). Feel free to answer the original query with what you know and reference the summed webpages.")
+                
+                let contentStream = newModel.generateContentStream("This is the user's original query (\(title)). Here's the summed webpages Content: \(mainContent)")
                 
                 for try await chunk in contentStream {
                     if let text = chunk.text {
@@ -216,6 +231,7 @@ class GemSearchViewModel: ObservableObject {
             }
             
             catch {
+                print(error)
                 
                 errorMessage = error.localizedDescription
                 
@@ -358,8 +374,8 @@ struct GemSearchView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 20)
-                        .padding(.vertical, 12)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical)
                         .padding(.top, 20)
                     
                     
@@ -420,7 +436,7 @@ struct GemSearchView: View {
                     
                     Divider()
                         .opacity(0.7)
-                        .padding(.vertical, 12)
+                        .padding(.vertical, 8)
                     
                     
                     Text("Answer")
@@ -428,7 +444,7 @@ struct GemSearchView: View {
                         .fontDesign(.rounded)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, 20)
-                        .padding(.top)
+                        .padding(.top, 12)
                     
                     
                     Markdown(viewModel.answer)
@@ -451,24 +467,28 @@ struct GemSearchView: View {
                     .fontDesign(.monospaced)
                     .padding(.bottom, 8)
                 
-                if (viewModel.currentWebpage.isEmpty) {
-                    
-                    ActivityIndicatorView(isVisible: .constant(true), type: .opacityDots(count: 3, inset: 6))
-                        .frame(width: 42, height: 32)
-                    
-                } else {
-                    Text(viewModel.currentWebpage)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .fontDesign(.rounded)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.leading)
-                        .animation(.snappy, value: viewModel.currentWebpage)
-                        .contentTransition(.numericText(countsDown: true))
-                    
+                VStack {
+                    if (viewModel.currentWebpage.isEmpty) {
+                        
+                        ActivityIndicatorView(isVisible: .constant(true), type: .opacityDots(count: 3, inset: 6))
+                            .frame(width: 42, height: 32)
+                        
+                    } else {
+                        Text(viewModel.currentWebpage)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 20)
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.leading)
+                            .animation(.snappy, value: viewModel.currentWebpage)
+                            .contentTransition(.numericText(countsDown: true))
+                        
+                    }
                 }
+                .frame(height: 80)
+                
             }
             
         }

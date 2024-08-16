@@ -12,6 +12,7 @@
 		170FE4532C6E952A0012DF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4522C6E952A0012DF8A /* Assets.xcassets */; };
 		170FE4562C6E952A0012DF8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */; };
 		170FE45E2C6E955B0012DF8A /* GoogleGeminiAI in Frameworks */ = {isa = PBXBuildFile; productRef = 170FE45D2C6E955B0012DF8A /* GoogleGeminiAI */; };
+		1741599D2C6FD5F40036BCF7 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 1741599C2C6FD5F40036BCF7 /* SwiftSoup */; };
 		1748CCF62C6E96AB000DE4BD /* LangChain in Frameworks */ = {isa = PBXBuildFile; productRef = 1748CCF52C6E96AB000DE4BD /* LangChain */; };
 		1748CD012C6EBFE3000DE4BD /* AnswerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */; };
 		1748CD022C6EBFE3000DE4BD /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF82C6EBFE2000DE4BD /* Attributes.swift */; };
@@ -41,6 +42,7 @@
 		1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleAlsoAsk.swift; sourceTree = "<group>"; };
 		1748CCFE2C6EBFE2000DE4BD /* RelatedSearches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedSearches.swift; sourceTree = "<group>"; };
 		1748CCFF2C6EBFE2000DE4BD /* SearchParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchParameters.swift; sourceTree = "<group>"; };
+		175E14082C70039B0046792F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 				1748CCF62C6E96AB000DE4BD /* LangChain in Frameworks */,
 				17D0D5C02C6F042D0019F5CA /* ActivityIndicatorView in Frameworks */,
 				170FE45E2C6E955B0012DF8A /* GoogleGeminiAI in Frameworks */,
+				1741599D2C6FD5F40036BCF7 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +80,7 @@
 		170FE44D2C6E95280012DF8A /* GemSearch */ = {
 			isa = PBXGroup;
 			children = (
+				175E14082C70039B0046792F /* Info.plist */,
 				170FE44E2C6E95280012DF8A /* GemSearchApp.swift */,
 				170FE4502C6E95280012DF8A /* GemSearchView.swift */,
 				1748CD002C6EBFE2000DE4BD /* Serper */,
@@ -131,6 +135,7 @@
 				1748CCF52C6E96AB000DE4BD /* LangChain */,
 				1748CD0B2C6EE32C000DE4BD /* MarkdownUI */,
 				17D0D5BF2C6F042D0019F5CA /* ActivityIndicatorView */,
+				1741599C2C6FD5F40036BCF7 /* SwiftSoup */,
 			);
 			productName = GemSearch;
 			productReference = 170FE44B2C6E95280012DF8A /* GemSearch.app */;
@@ -165,6 +170,7 @@
 				1748CCF42C6E96AB000DE4BD /* XCRemoteSwiftPackageReference "langchain-swift-custom" */,
 				1748CD0A2C6EE32C000DE4BD /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				17D0D5BE2C6F042D0019F5CA /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				1741599B2C6FD5F40036BCF7 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 170FE44C2C6E95280012DF8A /* Products */;
 			projectDirPath = "";
@@ -339,6 +345,7 @@
 				DEVELOPMENT_TEAM = ZY3QU46J9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GemSearch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GemSearch;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -375,6 +382,7 @@
 				DEVELOPMENT_TEAM = ZY3QU46J9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GemSearch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GemSearch;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -432,6 +440,14 @@
 				kind = branch;
 			};
 		};
+		1741599B2C6FD5F40036BCF7 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.4;
+			};
+		};
 		1748CCF42C6E96AB000DE4BD /* XCRemoteSwiftPackageReference "langchain-swift-custom" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/The-MacBro-Group/langchain-swift-custom.git";
@@ -463,6 +479,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 170FE45C2C6E955B0012DF8A /* XCRemoteSwiftPackageReference "gemini-ai-swift" */;
 			productName = GoogleGeminiAI;
+		};
+		1741599C2C6FD5F40036BCF7 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1741599B2C6FD5F40036BCF7 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		1748CCF52C6E96AB000DE4BD /* LangChain */ = {
 			isa = XCSwiftPackageProductDependency;
