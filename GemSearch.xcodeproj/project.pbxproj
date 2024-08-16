@@ -11,6 +11,19 @@
 		170FE4512C6E95280012DF8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FE4502C6E95280012DF8A /* ContentView.swift */; };
 		170FE4532C6E952A0012DF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4522C6E952A0012DF8A /* Assets.xcassets */; };
 		170FE4562C6E952A0012DF8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */; };
+		170FE45E2C6E955B0012DF8A /* GoogleGeminiAI in Frameworks */ = {isa = PBXBuildFile; productRef = 170FE45D2C6E955B0012DF8A /* GoogleGeminiAI */; };
+		1748CCF62C6E96AB000DE4BD /* LangChain in Frameworks */ = {isa = PBXBuildFile; productRef = 1748CCF52C6E96AB000DE4BD /* LangChain */; };
+		1748CD012C6EBFE3000DE4BD /* AnswerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */; };
+		1748CD022C6EBFE3000DE4BD /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF82C6EBFE2000DE4BD /* Attributes.swift */; };
+		1748CD032C6EBFE3000DE4BD /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF92C6EBFE2000DE4BD /* Images.swift */; };
+		1748CD042C6EBFE3000DE4BD /* Json4Swift_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */; };
+		1748CD052C6EBFE3000DE4BD /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */; };
+		1748CD062C6EBFE3000DE4BD /* Organic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFC2C6EBFE2000DE4BD /* Organic.swift */; };
+		1748CD072C6EBFE3000DE4BD /* PeopleAlsoAsk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */; };
+		1748CD082C6EBFE3000DE4BD /* RelatedSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFE2C6EBFE2000DE4BD /* RelatedSearches.swift */; };
+		1748CD092C6EBFE3000DE4BD /* SearchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFF2C6EBFE2000DE4BD /* SearchParameters.swift */; };
+		1748CD0C2C6EE32C000DE4BD /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1748CD0B2C6EE32C000DE4BD /* MarkdownUI */; };
+		17D0D5C02C6F042D0019F5CA /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 17D0D5BF2C6F042D0019F5CA /* ActivityIndicatorView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +32,15 @@
 		170FE4502C6E95280012DF8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		170FE4522C6E952A0012DF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerBox.swift; sourceTree = "<group>"; };
+		1748CCF82C6EBFE2000DE4BD /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
+		1748CCF92C6EBFE2000DE4BD /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json4Swift_Base.swift; sourceTree = "<group>"; };
+		1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
+		1748CCFC2C6EBFE2000DE4BD /* Organic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organic.swift; sourceTree = "<group>"; };
+		1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleAlsoAsk.swift; sourceTree = "<group>"; };
+		1748CCFE2C6EBFE2000DE4BD /* RelatedSearches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedSearches.swift; sourceTree = "<group>"; };
+		1748CCFF2C6EBFE2000DE4BD /* SearchParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +48,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1748CD0C2C6EE32C000DE4BD /* MarkdownUI in Frameworks */,
+				1748CCF62C6E96AB000DE4BD /* LangChain in Frameworks */,
+				17D0D5C02C6F042D0019F5CA /* ActivityIndicatorView in Frameworks */,
+				170FE45E2C6E955B0012DF8A /* GoogleGeminiAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +79,7 @@
 			children = (
 				170FE44E2C6E95280012DF8A /* GemSearchApp.swift */,
 				170FE4502C6E95280012DF8A /* ContentView.swift */,
+				1748CD002C6EBFE2000DE4BD /* JSON to Swift Code */,
 				170FE4522C6E952A0012DF8A /* Assets.xcassets */,
 				170FE4542C6E952A0012DF8A /* Preview Content */,
 			);
@@ -65,6 +92,22 @@
 				170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1748CD002C6EBFE2000DE4BD /* JSON to Swift Code */ = {
+			isa = PBXGroup;
+			children = (
+				1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */,
+				1748CCF82C6EBFE2000DE4BD /* Attributes.swift */,
+				1748CCF92C6EBFE2000DE4BD /* Images.swift */,
+				1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */,
+				1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */,
+				1748CCFC2C6EBFE2000DE4BD /* Organic.swift */,
+				1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */,
+				1748CCFE2C6EBFE2000DE4BD /* RelatedSearches.swift */,
+				1748CCFF2C6EBFE2000DE4BD /* SearchParameters.swift */,
+			);
+			path = "JSON to Swift Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +126,12 @@
 			dependencies = (
 			);
 			name = GemSearch;
+			packageProductDependencies = (
+				170FE45D2C6E955B0012DF8A /* GoogleGeminiAI */,
+				1748CCF52C6E96AB000DE4BD /* LangChain */,
+				1748CD0B2C6EE32C000DE4BD /* MarkdownUI */,
+				17D0D5BF2C6F042D0019F5CA /* ActivityIndicatorView */,
+			);
 			productName = GemSearch;
 			productReference = 170FE44B2C6E95280012DF8A /* GemSearch.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +160,12 @@
 				Base,
 			);
 			mainGroup = 170FE4422C6E95280012DF8A;
+			packageReferences = (
+				170FE45C2C6E955B0012DF8A /* XCRemoteSwiftPackageReference "gemini-ai-swift" */,
+				1748CCF42C6E96AB000DE4BD /* XCRemoteSwiftPackageReference "langchain-swift-custom" */,
+				1748CD0A2C6EE32C000DE4BD /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				17D0D5BE2C6F042D0019F5CA /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+			);
 			productRefGroup = 170FE44C2C6E95280012DF8A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +192,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1748CD012C6EBFE3000DE4BD /* AnswerBox.swift in Sources */,
+				1748CD092C6EBFE3000DE4BD /* SearchParameters.swift in Sources */,
+				1748CD082C6EBFE3000DE4BD /* RelatedSearches.swift in Sources */,
 				170FE4512C6E95280012DF8A /* ContentView.swift in Sources */,
+				1748CD072C6EBFE3000DE4BD /* PeopleAlsoAsk.swift in Sources */,
+				1748CD032C6EBFE3000DE4BD /* Images.swift in Sources */,
+				1748CD062C6EBFE3000DE4BD /* Organic.swift in Sources */,
+				1748CD022C6EBFE3000DE4BD /* Attributes.swift in Sources */,
 				170FE44F2C6E95280012DF8A /* GemSearchApp.swift in Sources */,
+				1748CD052C6EBFE3000DE4BD /* KnowledgeGraph.swift in Sources */,
+				1748CD042C6EBFE3000DE4BD /* Json4Swift_Base.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,11 +339,14 @@
 				DEVELOPMENT_TEAM = ZY3QU46J9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GemSearch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,9 +354,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eunoia.GemSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -304,11 +375,14 @@
 				DEVELOPMENT_TEAM = ZY3QU46J9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GemSearch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,9 +390,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eunoia.GemSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -344,6 +422,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		170FE45C2C6E955B0012DF8A /* XCRemoteSwiftPackageReference "gemini-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DEmpire412/gemini-ai-swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1748CCF42C6E96AB000DE4BD /* XCRemoteSwiftPackageReference "langchain-swift-custom" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/The-MacBro-Group/langchain-swift-custom.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1748CD0A2C6EE32C000DE4BD /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
+		17D0D5BE2C6F042D0019F5CA /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		170FE45D2C6E955B0012DF8A /* GoogleGeminiAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 170FE45C2C6E955B0012DF8A /* XCRemoteSwiftPackageReference "gemini-ai-swift" */;
+			productName = GoogleGeminiAI;
+		};
+		1748CCF52C6E96AB000DE4BD /* LangChain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1748CCF42C6E96AB000DE4BD /* XCRemoteSwiftPackageReference "langchain-swift-custom" */;
+			productName = LangChain;
+		};
+		1748CD0B2C6EE32C000DE4BD /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1748CD0A2C6EE32C000DE4BD /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		17D0D5BF2C6F042D0019F5CA /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17D0D5BE2C6F042D0019F5CA /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 170FE4432C6E95280012DF8A /* Project object */;
 }
