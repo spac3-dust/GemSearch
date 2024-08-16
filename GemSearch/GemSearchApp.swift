@@ -11,7 +11,7 @@ import SwiftUI
 struct GemSearchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GemSearchView()
         }
     }
 }

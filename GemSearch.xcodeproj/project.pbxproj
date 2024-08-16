@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		170FE44F2C6E95280012DF8A /* GemSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FE44E2C6E95280012DF8A /* GemSearchApp.swift */; };
-		170FE4512C6E95280012DF8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FE4502C6E95280012DF8A /* ContentView.swift */; };
+		170FE4512C6E95280012DF8A /* GemSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FE4502C6E95280012DF8A /* GemSearchView.swift */; };
 		170FE4532C6E952A0012DF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4522C6E952A0012DF8A /* Assets.xcassets */; };
 		170FE4562C6E952A0012DF8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */; };
 		170FE45E2C6E955B0012DF8A /* GoogleGeminiAI in Frameworks */ = {isa = PBXBuildFile; productRef = 170FE45D2C6E955B0012DF8A /* GoogleGeminiAI */; };
@@ -16,7 +16,7 @@
 		1748CD012C6EBFE3000DE4BD /* AnswerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */; };
 		1748CD022C6EBFE3000DE4BD /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF82C6EBFE2000DE4BD /* Attributes.swift */; };
 		1748CD032C6EBFE3000DE4BD /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCF92C6EBFE2000DE4BD /* Images.swift */; };
-		1748CD042C6EBFE3000DE4BD /* Json4Swift_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */; };
+		1748CD042C6EBFE3000DE4BD /* SerperResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFA2C6EBFE2000DE4BD /* SerperResult.swift */; };
 		1748CD052C6EBFE3000DE4BD /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */; };
 		1748CD062C6EBFE3000DE4BD /* Organic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFC2C6EBFE2000DE4BD /* Organic.swift */; };
 		1748CD072C6EBFE3000DE4BD /* PeopleAlsoAsk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */; };
@@ -29,13 +29,13 @@
 /* Begin PBXFileReference section */
 		170FE44B2C6E95280012DF8A /* GemSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GemSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170FE44E2C6E95280012DF8A /* GemSearchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemSearchApp.swift; sourceTree = "<group>"; };
-		170FE4502C6E95280012DF8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		170FE4502C6E95280012DF8A /* GemSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemSearchView.swift; sourceTree = "<group>"; };
 		170FE4522C6E952A0012DF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		170FE4552C6E952A0012DF8A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerBox.swift; sourceTree = "<group>"; };
 		1748CCF82C6EBFE2000DE4BD /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		1748CCF92C6EBFE2000DE4BD /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json4Swift_Base.swift; sourceTree = "<group>"; };
+		1748CCFA2C6EBFE2000DE4BD /* SerperResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerperResult.swift; sourceTree = "<group>"; };
 		1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
 		1748CCFC2C6EBFE2000DE4BD /* Organic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organic.swift; sourceTree = "<group>"; };
 		1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleAlsoAsk.swift; sourceTree = "<group>"; };
@@ -78,8 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				170FE44E2C6E95280012DF8A /* GemSearchApp.swift */,
-				170FE4502C6E95280012DF8A /* ContentView.swift */,
-				1748CD002C6EBFE2000DE4BD /* JSON to Swift Code */,
+				170FE4502C6E95280012DF8A /* GemSearchView.swift */,
+				1748CD002C6EBFE2000DE4BD /* Serper */,
 				170FE4522C6E952A0012DF8A /* Assets.xcassets */,
 				170FE4542C6E952A0012DF8A /* Preview Content */,
 			);
@@ -94,20 +94,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		1748CD002C6EBFE2000DE4BD /* JSON to Swift Code */ = {
+		1748CD002C6EBFE2000DE4BD /* Serper */ = {
 			isa = PBXGroup;
 			children = (
 				1748CCF72C6EBFE2000DE4BD /* AnswerBox.swift */,
 				1748CCF82C6EBFE2000DE4BD /* Attributes.swift */,
 				1748CCF92C6EBFE2000DE4BD /* Images.swift */,
-				1748CCFA2C6EBFE2000DE4BD /* Json4Swift_Base.swift */,
+				1748CCFA2C6EBFE2000DE4BD /* SerperResult.swift */,
 				1748CCFB2C6EBFE2000DE4BD /* KnowledgeGraph.swift */,
 				1748CCFC2C6EBFE2000DE4BD /* Organic.swift */,
 				1748CCFD2C6EBFE2000DE4BD /* PeopleAlsoAsk.swift */,
 				1748CCFE2C6EBFE2000DE4BD /* RelatedSearches.swift */,
 				1748CCFF2C6EBFE2000DE4BD /* SearchParameters.swift */,
 			);
-			path = "JSON to Swift Code";
+			path = Serper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,14 +195,14 @@
 				1748CD012C6EBFE3000DE4BD /* AnswerBox.swift in Sources */,
 				1748CD092C6EBFE3000DE4BD /* SearchParameters.swift in Sources */,
 				1748CD082C6EBFE3000DE4BD /* RelatedSearches.swift in Sources */,
-				170FE4512C6E95280012DF8A /* ContentView.swift in Sources */,
+				170FE4512C6E95280012DF8A /* GemSearchView.swift in Sources */,
 				1748CD072C6EBFE3000DE4BD /* PeopleAlsoAsk.swift in Sources */,
 				1748CD032C6EBFE3000DE4BD /* Images.swift in Sources */,
 				1748CD062C6EBFE3000DE4BD /* Organic.swift in Sources */,
 				1748CD022C6EBFE3000DE4BD /* Attributes.swift in Sources */,
 				170FE44F2C6E95280012DF8A /* GemSearchApp.swift in Sources */,
 				1748CD052C6EBFE3000DE4BD /* KnowledgeGraph.swift in Sources */,
-				1748CD042C6EBFE3000DE4BD /* Json4Swift_Base.swift in Sources */,
+				1748CD042C6EBFE3000DE4BD /* SerperResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

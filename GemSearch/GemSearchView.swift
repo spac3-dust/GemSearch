@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GemSearchView.swift
 //  GemSearch
 //
 //  Created by Abe on 8/15/24.
@@ -31,7 +31,7 @@ enum SearchState {
 }
 
 
-class ContentViewModel: ObservableObject {
+class GemSearchViewModel: ObservableObject {
     
     @Published var viewState: SearchState = .input
     
@@ -87,7 +87,7 @@ class ContentViewModel: ObservableObject {
                 
                 var array = []
                 
-                var user: Json4Swift_Base?
+                var serperResult: SerperResult?
                 
                 let prompt = inputMessage
                 title = inputMessage
@@ -128,7 +128,7 @@ class ContentViewModel: ObservableObject {
                 let data = try await URLSession.shared.data(for: request)
                 
                 let decoder = JSONDecoder()
-                user = try decoder.decode(Json4Swift_Base.self, from: data.0)
+                serperResult = try decoder.decode(SerperResult.self, from: data.0)
                 
                 
                 let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -141,13 +141,13 @@ class ContentViewModel: ObservableObject {
                 
                 var mainContent = ""
                 
-                guard user?.organic != nil else { throw "Missing API Data" }
+                guard serperResult?.organic != nil else { throw "Missing API Data" }
                 
-                if let content = user!.answerBox {
+                if let content = serperResult!.answerBox {
                     mainContent += content.snippet ?? ""
                 }
                 
-                if let content = user!.knowledgeGraph {
+                if let content = serperResult!.knowledgeGraph {
                     mainContent += content.description ?? ""
                     
                     //                    if content.imageUrl != nil {
@@ -157,7 +157,7 @@ class ContentViewModel: ObservableObject {
                 }
                 
                 
-                for link in user!.organic! {
+                for link in serperResult!.organic! {
                     
                     guard link.link != nil else { continue }
                     
@@ -248,9 +248,9 @@ class ContentViewModel: ObservableObject {
 }
 
 
-struct ContentView: View {
+struct GemSearchView: View {
     
-    @StateObject var viewModel = ContentViewModel()
+    @StateObject var viewModel = GemSearchViewModel()
     
     @FocusState private var isFieldFocused: Bool
     
@@ -488,5 +488,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    GemSearchView()
 }
