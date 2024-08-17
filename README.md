@@ -1,4 +1,4 @@
-# Portfolio Project.
+# GemSearch
 
 A Gemini Powered Google Search.
 
