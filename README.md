@@ -1,4 +1,4 @@
-**Portfolio Project.**
+#Portfolio Project.
 
 A Gemini Powered Google Search.
 
