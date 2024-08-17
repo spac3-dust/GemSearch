@@ -32,6 +32,7 @@ enum SearchState {
 }
 
 
+@MainActor
 class GemSearchViewModel: ObservableObject {
     
     @Published var viewState: SearchState = .input
@@ -114,7 +115,7 @@ class GemSearchViewModel: ObservableObject {
                     array = [prompt]
                 }
                 
-                let parameters = "{\"q\":\"\(array[0])\",\"num\":6}"
+                let parameters = "{\"q\":\"\(array[0])\",\"num\":5}"
                 let postData = parameters.data(using: .utf8)
                 
                 var request = URLRequest(url: URL(string: "https://google.serper.dev/search")!,timeoutInterval: Double.infinity)
@@ -160,10 +161,10 @@ class GemSearchViewModel: ObservableObject {
                     
                     guard link.link != nil else { continue }
                     
-                    let data = try await URLSession.shared.data(from: URL(string: link.link!)!)
+                    let data = try await URLSession.shared.data(for: URLRequest(url: URL(string: link.link!)!))
                     let doc = String(data: data.0, encoding: .utf8)
                     
-                    guard doc != nil else {continue}
+                    guard doc != nil else { continue }
                     
                     let document = try SwiftSoup.parse(doc!)
                     
@@ -175,9 +176,10 @@ class GemSearchViewModel: ObservableObject {
                     for paragraph in paragraphs {
                         text = try? paragraph.text()
                         
+                        
                         guard text != nil else {continue}
                         
-                        mainContent += text!
+                        mainContent += text!.prefix(1000) // 200 words
                         mainContent += "\n"
                         //                        print("Paragraph: \(text)")
                     }
@@ -220,7 +222,9 @@ class GemSearchViewModel: ObservableObject {
                 for try await chunk in contentStream {
                     if let text = chunk.text {
                         
-                        answer += text
+                        withAnimation(.snappy(duration: 0.3)) {
+                            answer += text
+                        }
                         
                     }
                 }
@@ -375,8 +379,9 @@ struct GemSearchView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
-                        .padding(.vertical)
+                        .padding(.vertical, 20)
                         .padding(.top, 20)
+                    
                     
                     
                     Text("Sources")
@@ -436,7 +441,7 @@ struct GemSearchView: View {
                     
                     Divider()
                         .opacity(0.7)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 12)
                     
                     
                     Text("Answer")
@@ -449,6 +454,7 @@ struct GemSearchView: View {
                     
                     Markdown(viewModel.answer)
                         .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                         .padding(.bottom, 32)
                     
@@ -474,8 +480,9 @@ struct GemSearchView: View {
                             .frame(width: 42, height: 32)
                         
                     } else {
+                        
                         Text(viewModel.currentWebpage)
-                            .font(.title3)
+                            .font(.system(size: 21))
                             .fontWeight(.bold)
                             .fontDesign(.rounded)
                             .padding(.vertical, 10)
@@ -487,7 +494,7 @@ struct GemSearchView: View {
                         
                     }
                 }
-                .frame(height: 80)
+                .frame(height: 72)
                 
             }
             
