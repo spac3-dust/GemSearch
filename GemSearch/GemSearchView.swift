@@ -387,7 +387,7 @@ struct GemSearchView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal)
                             .padding(.vertical, 20)
                             .padding(.top, 20)
                         
@@ -397,7 +397,7 @@ struct GemSearchView: View {
                             .font(.headline)
                             .fontDesign(.rounded)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 20)
+                            .padding(.leading)
                         
                         
                         
@@ -444,7 +444,7 @@ struct GemSearchView: View {
                                     
                                 }
                             }
-                            .padding(.leading, 8)
+                            .padding(.leading, 4)
                         }
                         
                         
@@ -457,7 +457,7 @@ struct GemSearchView: View {
                             .font(.headline)
                             .fontDesign(.rounded)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 20)
+                            .padding(.leading)
                             .padding(.top, 12)
                         
                         
@@ -470,6 +470,7 @@ struct GemSearchView: View {
                         
                         
                     }
+                    .padding(.horizontal, 8)
                 }
                 
                 
@@ -501,7 +502,7 @@ struct GemSearchView: View {
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundStyle(.primary.opacity(0.7))
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 4)
                 
                 VStack {
                     if (viewModel.currentWebpage.isEmpty) {
