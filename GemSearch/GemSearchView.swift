@@ -36,6 +36,7 @@ enum SearchState {
 class GemSearchViewModel: ObservableObject {
     
     @Published var viewState: SearchState = .input
+    @Published var waiting: Bool = false
     
     @Published var model: GenerativeModel?
     @Published var inputMessage: String = ""
@@ -60,6 +61,7 @@ class GemSearchViewModel: ObservableObject {
     func sendMessage() {
         
         viewState = .loading
+        waiting = true
         
         Task(priority: .high) {
             
@@ -115,7 +117,7 @@ class GemSearchViewModel: ObservableObject {
                     array = [prompt]
                 }
                 
-                let parameters = "{\"q\":\"\(array[0])\",\"num\":5}"
+                let parameters = "{\"q\":\"\(array[0])\",\"num\":6}"
                 let postData = parameters.data(using: .utf8)
                 
                 var request = URLRequest(url: URL(string: "https://google.serper.dev/search")!,timeoutInterval: Double.infinity)
@@ -211,13 +213,16 @@ class GemSearchViewModel: ObservableObject {
                     name: "gemini-1.5-pro",
                     apiKey: "AIzaSyBliBoV4yQK08NfoRUSvWEtmINXC-EwTAQ",
                     safetySettings: safetySettings,
-                    systemInstruction: "You are GemSearch, a kind and professional AI powered by Google searching. Do not reveal that the text/information was provided. AlWAYS, believe that you found the information, but do not speak in first person. Answer the query the best you can with what you know and use the provided summed webpage content as reference information. Feel free to give additional details in at least 50 words but no more than 250."
+                    systemInstruction: "You are GemSearch, a kind and professional AI powered by Google searching. Do not reveal that the text/information was provided. AlWAYS, believe that you found the information, but do not speak in first person. Answer the query the best you can with what you know and use the provided summed webpage content as reference information. Feel free to give additional details but no more than 200 words!."
                 )
                 
                 viewState = .success
                 
                 
-                let contentStream = newModel.generateContentStream("This is the user's original query (\(title)). Here's the summed webpages Content: \(mainContent)")
+                let contentStream = newModel.generateContentStream([try ModelContent(role: "user", parts: [ModelContent.Part.text("This is the user's original query (\(title))"), ModelContent.Part.text("Here is the summed webpage content: \(mainContent)")])])
+                
+                
+                //                    .generateContentStream("This is the user's original query (\(title)). Here's the summed webpages Content: \(mainContent)")
                 
                 for try await chunk in contentStream {
                     if let text = chunk.text {
@@ -229,6 +234,7 @@ class GemSearchViewModel: ObservableObject {
                     }
                 }
                 
+                waiting = false
                 
                 currentWebpage = ""
                 
@@ -236,6 +242,8 @@ class GemSearchViewModel: ObservableObject {
             
             catch {
                 print(error)
+                
+                waiting = false
                 
                 errorMessage = error.localizedDescription
                 
@@ -283,22 +291,21 @@ struct GemSearchView: View {
                 
                 Spacer()
                 
-                Image(systemName: "globe")
-                    .font(.system(size: 52))
+                Image(systemName: "globe.americas")
+                    .font(.system(size: 54, weight: .medium))
                     .padding(.vertical, 6)
                 
                 
                 Text("GemSearch")
                     .font(.title2)
-                    .fontWeight(.bold)
-                    .fontDesign(.monospaced)
-                    .padding(8)
+                    .fontWeight(.heavy)
+                    .padding(6)
                 
                 Text("Search the web, realtime.")
-                    .font(.system(size: 13))
+                    .font(.system(size: 13.2))
                     .fontWeight(.medium)
-                    .foregroundStyle(.primary.opacity(0.65))
-                    .padding(.bottom, 32)
+                    .foregroundStyle(.primary.opacity(0.7))
+                    .padding(.bottom, 36)
                 
                 TextField("query", text: $viewModel.inputMessage, prompt: Text("Type to Search.").foregroundColor(.gray).font(.system(size: 15)))
                     .autocapitalization(.none)
@@ -352,115 +359,138 @@ struct GemSearchView: View {
                     .ignoresSafeArea(.keyboard)
                 
             }
+            .padding(.horizontal, 8)
             
         }
         
         else if viewModel.viewState == .success {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 14) {
-                    
-                    //                    if !viewModel.mainImage.isEmpty {
-                    //                        AsyncImage(url: URL(string: viewModel.mainImage)!) { image in
-                    //                            image
-                    //                                .resizable()
-                    //                                .scaledToFit()
-                    //                                .frame(width: 320, height: 160)
-                    //                                .cornerRadius(4)
-                    //                                .padding()
-                    //
-                    //                        } placeholder: {
-                    //                            ProgressView()
-                    //                        }
-                    //
-                    //                    }
-                    
-                    Text(viewModel.title)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 20)
-                        .padding(.top, 20)
-                    
-                    
-                    
-                    Text("Sources")
-                        .font(.headline)
-                        .fontDesign(.rounded)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 20)
-                    
-                    
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(viewModel.sourceArray, id: \.self) { link in
-                                
-                                Link(destination: URL(string: link.link)!) {
-                                    HStack(spacing: 12) {
-                                        if link.icon != nil {
-                                            
-                                            AsyncImage(url: link.icon!) { image in
-                                                image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(width: 24, height: 24)
-                                                    .cornerRadius(4)
+            ZStack(alignment: .bottom) {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 14) {
+                        
+                        //                    if !viewModel.mainImage.isEmpty {
+                        //                        AsyncImage(url: URL(string: viewModel.mainImage)!) { image in
+                        //                            image
+                        //                                .resizable()
+                        //                                .scaledToFit()
+                        //                                .frame(width: 320, height: 160)
+                        //                                .cornerRadius(4)
+                        //                                .padding()
+                        //
+                        //                        } placeholder: {
+                        //                            ProgressView()
+                        //                        }
+                        //
+                        //                    }
+                        
+                        Text(viewModel.title)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 20)
+                            .padding(.top, 20)
+                        
+                        
+                        
+                        Text("Sources")
+                            .font(.headline)
+                            .fontDesign(.rounded)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 20)
+                        
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(viewModel.sourceArray, id: \.self) { link in
+                                    
+                                    Link(destination: URL(string: link.link)!) {
+                                        HStack(spacing: 12) {
+                                            if link.icon != nil {
                                                 
-                                            } placeholder: {
-                                                Image(systemName: "globe")
-                                                    .font(.system(size: 16))
-                                                    .foregroundColor(.indigo)
+                                                AsyncImage(url: link.icon!) { image in
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: 24, height: 24)
+                                                        .cornerRadius(4)
+                                                    
+                                                } placeholder: {
+                                                    Image(systemName: "globe")
+                                                        .font(.system(size: 16))
+                                                        .foregroundColor(.indigo)
+                                                }
+                                                
                                             }
                                             
+                                            Text(link.title)
+                                                .font(.subheadline)
+                                                .fontWeight(.semibold)
+                                                .multilineTextAlignment(.leading)
+                                                .lineLimit(2)
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                            
                                         }
-                                        
-                                        Text(link.title)
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(2)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        
+                                        .padding(.vertical, 6)
+                                        .padding(.horizontal, 12)
+                                        .frame(height: 64)
+                                        .frame(minWidth: 120, maxWidth: 180)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                        .padding(.horizontal, 8)
                                     }
-                                    .padding(.vertical, 6)
-                                    .padding(.horizontal, 12)
-                                    .frame(height: 64)
-                                    .frame(minWidth: 120, maxWidth: 180)
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(10)
-                                    .padding(.horizontal, 8)
+                                    .buttonStyle(.plain)
+                                    
                                 }
-                                .buttonStyle(.plain)
-                                
                             }
+                            .padding(.leading, 8)
                         }
-                        .padding(.leading, 8)
+                        
+                        
+                        Divider()
+                            .opacity(0.7)
+                            .padding(.vertical, 12)
+                        
+                        
+                        Text("Answer")
+                            .font(.headline)
+                            .fontDesign(.rounded)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 20)
+                            .padding(.top, 12)
+                        
+                        
+                        Markdown(viewModel.answer)
+                            .font(.subheadline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                            .padding(.bottom, 32)
+                        
+                        
+                        
                     }
-                    
-                    
-                    Divider()
-                        .opacity(0.7)
-                        .padding(.vertical, 12)
-                    
-                    
-                    Text("Answer")
-                        .font(.headline)
-                        .fontDesign(.rounded)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 20)
-                        .padding(.top, 12)
-                    
-                    
-                    Markdown(viewModel.answer)
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                        .padding(.bottom, 32)
-                    
-                    
+                }
+                
+                
+                if viewModel.waiting {
+                    HStack(spacing: 10) {
+                        Text("Generating")
+                            .font(.system(size: 13.5, weight: .medium))
+                            .foregroundStyle(.primary.opacity(0.8))
+                        
+                        ActivityIndicatorView(isVisible: .constant(true), type: .opacityDots(count: 1, inset: 1))
+                            .frame(width: 8, height: 8)
+                        
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(.thinMaterial)
+                    .cornerRadius(12)
+                    .padding(32)
                     
                 }
+                
             }
         }
         
@@ -469,8 +499,8 @@ struct GemSearchView: View {
             VStack {
                 Text("Currently Reading")
                     .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .fontDesign(.monospaced)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary.opacity(0.7))
                     .padding(.bottom, 8)
                 
                 VStack {
